@@ -1,0 +1,14 @@
+#!/bin/bash
+# Update and install necessary packages
+apt-get update
+apt-get install -y unzip awscli
+
+
+aws s3 cp s3://mpcs-cc-students/qixshawnchen/gas_annotator.zip /home/ec2-user/mpcs-cc/
+
+unzip /home/ec2-user/mpcs-cc/gas_annotator.zip -d /home/ec2-user/mpcs-cc
+chown -R ec2-user:ec2-user /home/ec2-user/mpcs-cc/gas/
+chmod +x /home/ec2-user/mpcs-cc/gas/ann/anntools/run_ann.sh
+
+pip install pytz
+sudo -u ec2-user python /home/ec2-user/mpcs-cc/gas/ann/anntools/run_ann.sh
